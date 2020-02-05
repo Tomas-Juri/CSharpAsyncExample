@@ -19,7 +19,7 @@ namespace CSharpAsyncExample
             Console.WriteLine("---");
 
             Console.WriteLine("Make Breakfast with ComplexAsynchronous chef");
-            MakeBreakfastWithAsynchronousChef().Wait();
+            MakeBreakfastWithComplexAsynchronousChef().Wait();
         }
 
         static void MakeBreakfastWithSynchronousChef()
