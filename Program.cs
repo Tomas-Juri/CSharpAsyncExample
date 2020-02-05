@@ -9,12 +9,12 @@ namespace CSharpAsyncExample
         static void Main(string[] args)
         {
             Console.WriteLine("Make Breakfast with Synchronous chef");
-            // MakeBreakfastWithSynchronousChef();
+            MakeBreakfastWithSynchronousChef();
 
             Console.WriteLine("---");
 
             Console.WriteLine("Make Breakfast with Asynchronous chef");
-            // MakeBreakfastWithAsynchronousChef().Wait();
+            MakeBreakfastWithAsynchronousChef().Wait();
 
             Console.WriteLine("---");
 

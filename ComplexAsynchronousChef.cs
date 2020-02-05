@@ -35,14 +35,14 @@ namespace CSharpAsyncExample
         private Task BoilEggs() => Task.Run(() =>
         {
             Console.WriteLine("[Chef] Put Eggs into boiling water");
-            Task.Delay(70 * DelayMultiply);
+            Task.Delay(70 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Eggs Boiled");
         });
 
         private Task FryBacon() => Task.Run(() =>
         {
             Console.WriteLine("[Chef] Throw bacon in pan");
-            Task.Delay(40 * DelayMultiply);
+            Task.Delay(40 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Bacon Fried");
         });
 
