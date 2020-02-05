@@ -13,5 +13,7 @@ In our console application, we are going to demonstrate using async/await & Task
  3. `dotnet run` 
  4. Output can be observed in console
 
+Every Chef class includes a delay multiplier property, which can be used to increase/decrease the delay in each chefs task.
+
 ## Author
 By [ArtzTJU](https://github.com/ArtzTJU)

@@ -4,11 +4,11 @@ using System.Threading.Tasks;
 
 namespace CSharpAsyncExample
 {
-    public class Chef
+    public class AsynchronousChef
     {
         public int DelayMultiply { get; set; }
 
-        public Chef()
+        public AsynchronousChef()
         {
             DelayMultiply = 100;
         }
@@ -64,10 +64,9 @@ namespace CSharpAsyncExample
 
         public Task BoilWater() => Task.Run(() =>
         {
-            Console.WriteLine("[Chef] Set water to boil");
+            Console.WriteLine("[Chef] Set coffee water to boil");
             Thread.Sleep(200 * DelayMultiply);
-            Console.WriteLine("[Chef] Water is boiled");
+            Console.WriteLine("[Chef] Coffee Water is boiled");
         });
     }
-
 }
