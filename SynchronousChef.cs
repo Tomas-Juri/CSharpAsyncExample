@@ -12,6 +12,18 @@ namespace CSharpAsyncExample
             DelayMultiply = 100;
         }
 
+        public void MakeBreakfast()
+        {
+            BoilWater();
+            BoilEggs();
+            FryBacon();
+            ToastBread();
+            ApplyButter();
+            ApplyJam();
+            PourCoffee();
+            PourJuice();
+        }
+
         public void PourCoffee()
         {
             Console.WriteLine("[Chef] Start pouring coffee");

@@ -1,86 +1,71 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace CSharpAsyncExample
 {
     public class Kitchen
     {
+        private static Stopwatch Stopwatch { get; set; }
+
         static void Main(string[] args)
         {
-            Console.WriteLine("Make Breakfast with Synchronous chef");
+            Stopwatch = new Stopwatch();
+            Stopwatch.Start();
+            Console.WriteLine($"[Kitchen] Started making breakfast - Synchronous Chef");
+
             MakeBreakfastWithSynchronousChef();
 
-            Console.WriteLine("---");
+            Console.WriteLine($"[Kitchen] Breakfast done in '{Stopwatch.Elapsed.Seconds}'s '{Stopwatch.Elapsed.Milliseconds}'ms");
+            Stopwatch.Restart();
 
-            Console.WriteLine("Make Breakfast with Asynchronous chef");
+            Console.WriteLine("---");
+            Console.WriteLine($"[Kitchen] Started making breakfast - Asynchronous Chef");
+
             MakeBreakfastWithAsynchronousChef().Wait();
 
-            Console.WriteLine("---");
+            Console.WriteLine($"[Kitchen] Breakfast done in '{Stopwatch.Elapsed.Seconds}'s '{Stopwatch.Elapsed.Milliseconds}'ms");
+            Stopwatch.Restart();
 
-            Console.WriteLine("Make Breakfast with ComplexAsynchronous chef");
+            Console.WriteLine("---");
+            Console.WriteLine($"[Kitchen] Started making breakfast - ComplexAsynchronous Chef");
+
             MakeBreakfastWithComplexAsynchronousChef().Wait();
+
+            Console.WriteLine($"[Kitchen] Breakfast done in '{Stopwatch.Elapsed.Seconds}'s '{Stopwatch.Elapsed.Milliseconds}'ms");
         }
 
         static void MakeBreakfastWithSynchronousChef()
         {
             var chef = new SynchronousChef();
-            var timer = new Stopwatch();
-            timer.Start();
-
-            Console.WriteLine($"[Kitchen] Started making breakfast");
-
-            chef.BoilWater();
-            chef.BoilEggs();
-            chef.FryBacon();
-            chef.ToastBread();
-            chef.ApplyButter();
-            chef.ApplyJam();
-            chef.PourCoffee();
-            chef.PourJuice();
-
-            timer.Stop();
-            Console.WriteLine($"[Kitchen] Breakfast done in '{timer.Elapsed.Seconds}'s '{timer.Elapsed.Milliseconds}'ms");
+            chef.MakeBreakfast();
         }
 
         static async Task MakeBreakfastWithAsynchronousChef()
         {
             var chef = new AsynchronousChef();
-            var timer = new Stopwatch();
-            timer.Start();
-
-            Console.WriteLine($"[Kitchen] Started making breakfast");
-
-            var waterTask = chef.BoilWater();
-            var eggsTask = chef.BoilEggs();
-            var baconTask = chef.FryBacon();
-            var breadTask = chef.ToastBread();
-
-            await breadTask;
-            await chef.ApplyButter();
-            await chef.ApplyJam();
-
-            await Task.WhenAll(eggsTask, baconTask, waterTask);
-            await chef.PourCoffee();
-            await chef.PourJuice();
-
-            timer.Stop();
-            Console.WriteLine($"[Kitchen] Breakfast done in '{timer.Elapsed.Seconds}'s '{timer.Elapsed.Milliseconds}'ms");
+            await chef.MakeBreakfast();
         }
 
-        
         static async Task MakeBreakfastWithComplexAsynchronousChef()
         {
             var chef = new ComplexAsynchronousChef();
-            var timer = new Stopwatch();
-            timer.Start();
-
-            Console.WriteLine($"[Kitchen] Started making breakfast");
-
             await chef.MakeBreakfast();
+        }
 
-            timer.Stop();
-            Console.WriteLine($"[Kitchen] Breakfast done in '{timer.Elapsed.Seconds}'s '{timer.Elapsed.Milliseconds}'ms");
+        static async Task MakeBreakfastAndDisturbChef()
+        {
+            var chef = new AsynchronousChef();
+            var breakfastTask = chef.MakeBreakfast();
+
+            Task.Delay(1500).Wait();
+            Console.WriteLine($"[Kitchen] a joke from chef: '{chef.TellAJoke().Result}'");
+
+            Task.Delay(9000).Wait();
+            chef.PourJuice().Wait();
+
+            await breakfastTask;
         }
     }
 }

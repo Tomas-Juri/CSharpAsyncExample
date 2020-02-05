@@ -23,7 +23,7 @@ namespace CSharpAsyncExample
             await Task.WhenAll(coffeeTask, eggsTask, baconTask, breadTask);
         }
 
-        private async Task PrepareCoffee()
+        public async Task PrepareCoffee()
         {
             Console.WriteLine("[Chef] Start preparing coffee");
             await BoilWater();
@@ -32,21 +32,21 @@ namespace CSharpAsyncExample
             Console.WriteLine("[Chef] Coffee Ready");
         }
 
-        private Task BoilEggs() => Task.Run(() =>
+        public Task BoilEggs() => Task.Run(() =>
         {
             Console.WriteLine("[Chef] Put Eggs into boiling water");
             Task.Delay(70 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Eggs Boiled");
         });
 
-        private Task FryBacon() => Task.Run(() =>
+        public Task FryBacon() => Task.Run(() =>
         {
             Console.WriteLine("[Chef] Throw bacon in pan");
             Task.Delay(40 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Bacon Fried");
         });
 
-        private async Task PrepareBread()
+        public async Task PrepareBread()
         {
             Console.WriteLine("[Chef] Put bread in toaster");
             await Task.Delay(20 * DelayMultiply);
@@ -56,28 +56,28 @@ namespace CSharpAsyncExample
             Console.WriteLine("[Chef] Bread ready");
         }
 
-        private void ApplyButter()
+        public void ApplyButter()
         {
             Console.WriteLine("[Chef] Start spreading Butter");
             Task.Delay(15 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Butter applied");
         }
 
-        private void ApplyJam()
+        public void ApplyJam()
         {
             Console.WriteLine("[Chef] Start spreading Jam");
             Task.Delay(15 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Jam applied");
         }
 
-        private void PourJuice()
+        public void PourJuice()
         {
             Console.WriteLine("[Chef] Start pouring Juice");
             Task.Delay(5 * DelayMultiply).Wait();
             Console.WriteLine("[Chef] Juice Ready");
         }
 
-        private async Task BoilWater()
+        public async Task BoilWater()
         {
             Console.WriteLine("[Chef] Set coffee water to boil");
             await Task.Delay(200 * DelayMultiply);

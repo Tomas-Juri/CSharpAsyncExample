@@ -13,60 +13,84 @@ namespace CSharpAsyncExample
             DelayMultiply = 100;
         }
 
-        public Task PourCoffee() => Task.Run(() =>
+        public async Task MakeBreakfast()
+        {
+            var waterTask = BoilWater();
+            var eggsTask = BoilEggs();
+            var baconTask = FryBacon();
+            var breadTask = ToastBread();
+
+            await breadTask;
+            await ApplyButter();
+            await ApplyJam();
+
+            // await eggsTask;
+            // await baconTask;
+            // await waterTask;               
+            await Task.WhenAll(eggsTask, baconTask, waterTask);
+            await PourCoffee();
+            await PourJuice();
+        }
+
+        public async Task PourCoffee()
         {
             Console.WriteLine("[Chef] Start pouring coffee");
-            Thread.Sleep(5 * DelayMultiply);
+            await Task.Delay(5 * DelayMultiply);
             Console.WriteLine("[Chef] Coffee Ready");
-        });
+        }
 
-        public Task BoilEggs() => Task.Run(() =>
+        public async Task BoilEggs() 
         {
             Console.WriteLine("[Chef] Put Eggs into boiling water");
-            Thread.Sleep(70 * DelayMultiply);
+            await Task.Delay(70 * DelayMultiply);
             Console.WriteLine("[Chef] Eggs Boiled");
-        });
+        }
 
-        public Task FryBacon() => Task.Run(() =>
+        public async Task FryBacon()
         {
             Console.WriteLine("[Chef] Throw bacon in pan");
-            Thread.Sleep(40 * DelayMultiply);
+            await Task.Delay(40 * DelayMultiply);
             Console.WriteLine("[Chef] Bacon Fried");
-        });
+        }
 
-        public Task ToastBread() => Task.Run(() =>
+        public async Task ToastBread()
         {
             Console.WriteLine("[Chef] Put bread in toaster");
-            Thread.Sleep(20 * DelayMultiply);
+            await Task.Delay(20 * DelayMultiply);
             Console.WriteLine("[Chef] Bread Toasted");
-        });
+        }
 
-        public Task ApplyButter() => Task.Run(() =>
+        public async Task ApplyButter()
         {
             Console.WriteLine("[Chef] Start spreading Butter");
-            Thread.Sleep(15 * DelayMultiply);
+            await Task.Delay(15 * DelayMultiply);
             Console.WriteLine("[Chef] Butter applied");
-        });
+        }
 
-        public Task ApplyJam() => Task.Run(() =>
+        public async Task ApplyJam()
         {
             Console.WriteLine("[Chef] Start spreading Jam");
-            Thread.Sleep(15 * DelayMultiply);
+            await Task.Delay(15 * DelayMultiply);
             Console.WriteLine("[Chef] Jam applied");
-        });
+        }
 
-        public Task PourJuice() => Task.Run(() =>
+        public async Task PourJuice()
         {
             Console.WriteLine("[Chef] Start pouring Juice");
-            Thread.Sleep(5 * DelayMultiply);
+            await Task.Delay(5 * DelayMultiply);
             Console.WriteLine("[Chef] Juice Ready");
-        });
+        }
 
-        public Task BoilWater() => Task.Run(() =>
+        public async Task BoilWater()
         {
             Console.WriteLine("[Chef] Set coffee water to boil");
-            Thread.Sleep(200 * DelayMultiply);
+            await Task.Delay(200 * DelayMultiply);
             Console.WriteLine("[Chef] Coffee Water is boiled");
-        });
+        }
+    
+        public async Task<string> TellAJoke()
+        {
+            return "Joke";
+        }
     }
 }
