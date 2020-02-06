@@ -23,10 +23,7 @@ namespace CSharpAsyncExample
             await breadTask;
             await ApplyButter();
             await ApplyJam();
-
-            // await eggsTask;
-            // await baconTask;
-            // await waterTask;               
+            
             await Task.WhenAll(eggsTask, baconTask, waterTask);
             await PourCoffee();
             await PourJuice();
