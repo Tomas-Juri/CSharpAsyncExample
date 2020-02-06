@@ -26,14 +26,6 @@ namespace CSharpAsyncExample
             MakeBreakfastWithAsynchronousChef().Wait();
 
             Console.WriteLine($"[Kitchen] Breakfast done in '{Stopwatch.Elapsed.Seconds}'s '{Stopwatch.Elapsed.Milliseconds}'ms");
-            Stopwatch.Restart();
-
-            Console.WriteLine("---");
-            Console.WriteLine($"[Kitchen] Started making breakfast - ComplexAsynchronous Chef");
-
-            MakeBreakfastWithComplexAsynchronousChef().Wait();
-
-            Console.WriteLine($"[Kitchen] Breakfast done in '{Stopwatch.Elapsed.Seconds}'s '{Stopwatch.Elapsed.Milliseconds}'ms");
         }
 
         static void MakeBreakfastWithSynchronousChef()
@@ -45,12 +37,6 @@ namespace CSharpAsyncExample
         static async Task MakeBreakfastWithAsynchronousChef()
         {
             var chef = new AsynchronousChef();
-            await chef.MakeBreakfast();
-        }
-
-        static async Task MakeBreakfastWithComplexAsynchronousChef()
-        {
-            var chef = new ComplexAsynchronousChef();
             await chef.MakeBreakfast();
         }
 
